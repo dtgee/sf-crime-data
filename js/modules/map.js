@@ -46,7 +46,24 @@ var mapModule = (function(window,$) {
 
     function _init() {
         L.mapbox.accessToken = MAPBOX_ACCESS_TOKEN;
-        map = L.mapbox.map(MAP_CONTAINER_ELEMENT_ID, MAPBOX_MAP_STYLE_ID);
+        map = L.mapbox.map(MAP_CONTAINER_ELEMENT_ID, MAPBOX_MAP_STYLE_ID, {
+					//True by default, false if you want a wild map
+				  sleep: true,
+				  //time(ms) for the map to fall asleep upon mouseout
+					sleepTime: 750,
+				  //time(ms) until map wakes on mouseover
+					wakeTime: 750,
+				  //Defines whether or not the user is prompted on how to wake map
+					sleepNote: false,
+				  //Allows ability to override note styling
+					sleepNoteStyle: { color: 'red' },
+				  //Should hovering wake the map? (clicking always will)
+					hoverToWake: true,
+					//A message to inform users of waking map
+					wakeMessage: 'Click to Wake',
+				  //Opacity (between 0 and 1) of inactive map
+					sleepOpacity: 1 
+				});
 
         var drawControl = new L.Control.Draw(DRAW_CONTROL_SETTINGS).addTo(map);
         searchAreaGroup.addTo(map);

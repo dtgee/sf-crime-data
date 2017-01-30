@@ -68,20 +68,10 @@ var tableModule = (function(window, $) {
         _table = $('#example').DataTable(TABLE_CONFIG);
     }
 
-    function _loadDataToTable(incidentGeoJson) {
+    function _loadDataToTable(incidentJson) {
         _table.clear();
-        _table.rows.add(_convertGeoJsonToJson(incidentGeoJson));
+        _table.rows.add(incidentJson);
         _table.draw();
-    }
-
-    function _convertGeoJsonToJson(geoJson) {
-        var json = [];
-        $.each(geoJson.features, function(index, feature) {
-            feature.properties.location = feature.geometry;
-            json.push(feature.properties);
-        });
-
-        return json;
     }
 
     return {
